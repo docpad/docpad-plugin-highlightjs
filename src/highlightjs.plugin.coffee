@@ -19,7 +19,7 @@ module.exports = (BasePlugin) ->
 		return matches.pop().match(/lang(?:uage)?-(\w+)/)[1] if matches
 
 		# Auto-highlighting
-		''	
+		return ''	
 
 	# Define Plugin
 	class HighlightjsPlugin extends BasePlugin
@@ -31,6 +31,7 @@ module.exports = (BasePlugin) ->
 			replaceTab: null
 			sourceFilter: null
 			escape: false
+			removeIndentation: false
 			aliases:
 				coffee: 'coffeescript'
 				rb: 'ruby'
@@ -40,10 +41,8 @@ module.exports = (BasePlugin) ->
 		highlightElement: (opts) ->
 			# Prepare
 			{window,element,next} = opts
-			escape = @config.escape
-			replaceTab = @config.replaceTab
-			aliases = @config.aliases
-			sourceFilter = @config.sourceFilter
+			config = balUtil.extend({},@config,opts.config)
+			{escape,replaceTab,aliases,sourceFilter,removeIndentation} = config
 
 			# Is the element's code wrapped inside a child node?
 			childNode = element
@@ -60,10 +59,10 @@ module.exports = (BasePlugin) ->
 
 			# Grab the source code
 			source = childNode.innerHTML
+			source = balUtil.removeIndentation(source)  if removeIndentation isnt false
 
 			# Discover the language
 			language = childNode.getAttribute('lang') or parentNode.getAttribute('lang')
-
 			language = language.trim() or findLanguage(childNode) or findLanguage(parentNode)
 
 			# Highlight
@@ -157,6 +156,7 @@ module.exports = (BasePlugin) ->
 								window: window
 								element: element
 								next: tasks.completer()
+								config: file.attributes.plugins?.highlightjs
 							})
 
 						# Done

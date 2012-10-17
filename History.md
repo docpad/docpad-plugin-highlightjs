@@ -1,5 +1,9 @@
 ## History
 
+- v2.0.1 October 18, 2012
+	- Updated for Highlight.js 7.3.x
+	- Released
+
 - v2.0.0 October 12, 2012
 	- Cleaned
 	- Added aliases

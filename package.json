@@ -33,11 +33,8 @@
 	"dependencies": {
 		"bal-util": "1.13.x",
 		"jsdom": "0.2.x",
-		"highlight.js": "7.2.x"
+		"highlight.js": "7.3.x"
 	},
-	"bundledDependencies": [
-		"highlight.js"
-	],
 	"devDependencies": {
 		"coffee-script": "1.3.x"
 	},
