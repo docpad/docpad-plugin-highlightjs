@@ -1,5 +1,12 @@
 ## History
 
+- v2.1.0 October, 22, 2012
+	- Removed jsdom for simpler and way faster approach
+	- Fixed specifying language in some instances
+	- Changed `sourceFilter` option to the new `transforms` option
+	- Documented the `aliases` option
+	- Warns when language highlight definition is not found
+
 - v2.0.1 October 18, 2012
 	- Updated for Highlight.js 7.3.x
 	- Released

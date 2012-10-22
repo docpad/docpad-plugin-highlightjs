@@ -11,6 +11,19 @@ npm install --save docpad-plugin-highlightjs
 
 ## Configure
 
+### Language Aliases
+Sometimes one of the languages you want to highlight isn't available. In which case, you'd probably want to add an alias for it to a language that is similar. To do this, you'll want to add something like the following to your docpad configuration file.
+
+``` coffee
+plugins:
+	highlightjs:
+		aliases:
+			missinglanguage: 'alternativelanguage'
+```
+
+[You can find a list of languages that are supported via the Highlight.js source tree.](https://github.com/isagalaev/highlight.js/tree/master/src/languages)
+
+
 ### Replacing Tabs
 By default, this plugin does not expand `\t` characters to any number of spaces, etc.
 This can be changed in your [DocPad configuration file](https://github.com/bevry/docpad/wiki/Configuration) by adding something similar to the following:
@@ -24,31 +37,23 @@ plugins:
 This will replace all `\t` characters to 4 spaces.
 
 
-### Filtering Source Code
+### Transforms
 
-#### Using Functions
-Sometimes the source code in files is not ready to be parsed for highlighting and requires an extra step, like removing extra indentation. For situations like this, you can use a function like the following:
-
-``` coffee
-plugins:
-    sourceFilter: (source, language) ->
-        require('bal-util').removeIndentation(source)  if language in ['bash','coffeescript']
-```
-
-This will remove extra indentation if the language of the source code being highlighted is either `bash` or `coffeescript`. It depends on `bal-util` so you'll want to install it to your website with `npm install --save bal-util`
-
-
-#### Using Arrays (and Regular Expressions)
-You can also use an array for filtering source code. The first item of the array is the criteria to be matched and must be a **regular expression** *or* a **string**. The second item of the array is the **string** that will replace what matches.
-
-For example:
+You can apply transformations to code blocks before they are highlighted by using the `transforms` configuration option. It accepts an array of functions or arrays.
 
 ``` coffee
 plugins:
-    sourceFilter: [/\(C\)/gm,"&copy;"]
-```
+    highlightjs:
+    	transforms: [
+    		# Remove extra indentation from the code block
+    		# Requires: http://balupton.com/project/bal-util
+    		(source, language) ->
+        		require('bal-util').removeIndentation(source)  if language in ['bash','coffeescript']
 
-This will replace all instances of `\(C\)` with `&copy;` on every line of code using a regular expression. *Using this array is equivalent to using* `.replace(/\(C\)/gm,"&copy;")` *on the source code.*
+        	# Replace "(C)" with "&copy;"
+        	(source) -> source.replace /\(C\)/gm, '&copy;'
+        ]
+```
 
 
 ## History
