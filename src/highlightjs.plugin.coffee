@@ -3,23 +3,7 @@ module.exports = (BasePlugin) ->
 	jsdom = require('jsdom')
 	balUtil = require('bal-util')
 	hljs = require('highlight.js')
-
-	isPreOrCode = (element) ->
-		return false  unless element.tagName
-		element.tagName in ['PRE','CODE']
-	
-	findLanguage = (element) ->
-		classes = element.className
-		# No highlighting
-		return 'no-highlight'  if /no[-]?highlight/i.test(classes)
-
-		# Get all of the matching classes
-		matches = classes.match(/lang(?:uage)?-\w+/g)
-		# Return the last listed language class
-		return matches.pop().match(/lang(?:uage)?-(\w+)/)[1] if matches
-
-		# Auto-highlighting
-		return ''	
+	cache = {}
 
 	# Define Plugin
 	class HighlightjsPlugin extends BasePlugin
@@ -37,6 +21,25 @@ module.exports = (BasePlugin) ->
 				rb: 'ruby'
 				js: 'javascript'
 
+
+		isPreOrCode: (element) ->
+			return false  unless element.tagName
+			return element.tagName in ['PRE','CODE']
+
+		findLanguage: (element) ->
+			classes = element.className
+
+			# No highlighting
+			return 'no-highlight'  if /no[-]?highlight/i.test(classes)
+
+			# Get all of the matching classes
+			matches = classes.match(/lang(?:uage)?-\w+/g)
+			# Return the last listed language class
+			return matches.pop().match(/lang(?:uage)?-(\w+)/)[1] if matches
+
+			# Auto-highlighting
+			return ''
+
 		# Highlight an element
 		highlightElement: (opts) ->
 			# Prepare
@@ -46,12 +49,12 @@ module.exports = (BasePlugin) ->
 
 			# Is the element's code wrapped inside a child node?
 			childNode = element
-			while childNode.hasChildNodes() and isPreOrCode(childNode.childNodes[0])
+			while childNode.hasChildNodes() and @isPreOrCode(childNode.childNodes[0])
 				childNode = childNode.childNodes[0]
 
 			# Is the element's code wrapped in a parent node?
 			parentNode = element
-			while isPreOrCode(parentNode.parentNode)
+			while @isPreOrCode(parentNode.parentNode)
 				parentNode = parentNode.parentNode
 
 			# Skip if the element is already highlighted
@@ -63,7 +66,7 @@ module.exports = (BasePlugin) ->
 
 			# Discover the language
 			language = childNode.getAttribute('lang') or parentNode.getAttribute('lang')
-			language = language.trim() or findLanguage(childNode) or findLanguage(parentNode)
+			language = language.trim() or @findLanguage(childNode) or @findLanguage(parentNode)
 
 			# Highlight
 			if language isnt 'no-highlight'
@@ -123,44 +126,58 @@ module.exports = (BasePlugin) ->
 
 			# Handle
 			if file.type is 'document' and extension is 'html'
-				# Create DOM from content
-				jsdom.env(
-					html: "<html><body>#{opts.content}</body></html>"
-					features:
-						QuerySelector: true
-						MutationEvents: false
-					done: (err,window) ->
-						# Check
-						return next(err)  if err
+				# Check cache
+				cacheKey = opts.content+file.attributes.plugins?.highlightjs
+				cacheResult = cache[cacheKey]
+				if cacheResult
+					opts.content = cacheResult
+					return next()
 
-						# Find highlightable elements
-						elements = window.document.querySelectorAll(
-							'code pre, pre code, .highlight'
-						)
+				# Turn the code blocks into a JSDOM tree
+				replaceElementCallback = (outerHTML, elementNameMatched, attributes, innerHTML, replaceElementCompleteCallback) ->
+					# Create DOM from content
+					jsdom.env(
+						html: "<html><body>#{outerHTML}</body></html>"
+						features:
+							QuerySelector: false
+							MutationEvents: false
+						done: (err,window) ->
+							# Check
+							return replaceElementCompleteCallback(err)  if err
 
-						# Check
-						return next()  if elements.length is 0
+							# Find highlightable elements
+							elements = window.document.body.childNodes
 
-						# Tasks
-						tasks = new balUtil.Group (err) ->
-							return next(err)  if err
-							# Apply the content
-							opts.content = window.document.body.innerHTML
-							# Completed
-							return next()
-						tasks.total = elements.length
+							# Check
+							return replaceElementCompleteCallback()  if elements.length is 0
 
-						# Syntax highlight those elements
-						for element in elements
-							plugin.highlightElement({
-								window: window
-								element: element
-								next: tasks.completer()
-								config: file.attributes.plugins?.highlightjs
-							})
+							# Tasks
+							tasks = new balUtil.Group (err) ->
+								return replaceElementCompleteCallback(err)  if err
+								# Apply the content
+								result = window.document.body.innerHTML
+								# Completed
+								return replaceElementCompleteCallback(null,result)
+							tasks.total = elements.length
 
-						# Done
-						true
-				)
+							# Syntax highlight those elements
+							for element in elements
+								plugin.highlightElement({
+									window: window
+									element: element
+									next: tasks.completer()
+									config: file.attributes.plugins?.highlightjs
+								})
+
+							# Done
+							true
+					)
+
+				# Grab all the code blocks
+				balUtil.replaceElementAsync opts.content, '(?:code|pre)', replaceElementCallback, (err,result) ->
+					return next(err)  if err
+					opts.content = result
+					cache[cacheKey] = result
+					return next()
 			else
 				return next()
