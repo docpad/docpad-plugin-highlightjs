@@ -21,6 +21,26 @@ module.exports = (BasePlugin) ->
 				rb: 'ruby'
 				js: 'javascript'
 
+		# Get a JSDOM Window
+		# next(err,window)
+		getWindow: (next) ->
+			# Create window
+			if @window?
+				next(null,@window)
+			else
+				jsdom.env(
+					html: "<html><body></body></html>"
+					features:
+						QuerySelector: false
+						MutationEvents: false
+					done: (err,window) =>
+						return next(err)  if err
+						@window = window
+						return next(null,window)
+				)
+
+			# Chain
+			@
 
 		isPreOrCode: (element) ->
 			return false  unless element.tagName
@@ -43,7 +63,7 @@ module.exports = (BasePlugin) ->
 		# Highlight an element
 		highlightElement: (opts) ->
 			# Prepare
-			{window,element,next} = opts
+			{element,next} = opts
 			config = balUtil.extend({},@config,opts.config)
 			{escape,replaceTab,aliases,sourceFilter,removeIndentation} = config
 
@@ -53,12 +73,12 @@ module.exports = (BasePlugin) ->
 				childNode = childNode.childNodes[0]
 
 			# Is the element's code wrapped in a parent node?
-			parentNode = element
+			parentNode = childNode
 			while @isPreOrCode(parentNode.parentNode)
 				parentNode = parentNode.parentNode
 
 			# Skip if the element is already highlighted
-			return next()  if parentNode.className.indexOf('highlighted') isnt -1
+			return next(null,element.innerHTML)  if parentNode.className.indexOf('highlighted') isnt -1
 
 			# Grab the source code
 			source = childNode.innerHTML
@@ -108,13 +128,10 @@ module.exports = (BasePlugin) ->
 				result = source
 
 			# Handle
-			resultElWrapper = window.document.createElement('div')
-			resultElWrapper.innerHTML = """
+			result = """
 				<pre class="highlighted"><code class="#{language}">#{result}</code></pre>
 				"""
-			resultElInner = resultElWrapper.childNodes[0]
-			parentNode.parentNode.replaceChild(resultElInner,parentNode)
-			next()
+			next(null,result)
 
 			# Chain
 			@
@@ -133,51 +150,29 @@ module.exports = (BasePlugin) ->
 					opts.content = cacheResult
 					return next()
 
-				# Turn the code blocks into a JSDOM tree
-				replaceElementCallback = (outerHTML, elementNameMatched, attributes, innerHTML, replaceElementCompleteCallback) ->
-					# Create DOM from content
-					jsdom.env(
-						html: "<html><body>#{outerHTML}</body></html>"
-						features:
-							QuerySelector: false
-							MutationEvents: false
-						done: (err,window) ->
-							# Check
-							return replaceElementCompleteCallback(err)  if err
-
-							# Find highlightable elements
-							elements = window.document.body.childNodes
-
-							# Check
-							return replaceElementCompleteCallback()  if elements.length is 0
-
-							# Tasks
-							tasks = new balUtil.Group (err) ->
-								return replaceElementCompleteCallback(err)  if err
-								# Apply the content
-								result = window.document.body.innerHTML
-								# Completed
-								return replaceElementCompleteCallback(null,result)
-							tasks.total = elements.length
-
-							# Syntax highlight those elements
-							for element in elements
-								plugin.highlightElement({
-									window: window
-									element: element
-									next: tasks.completer()
-									config: file.attributes.plugins?.highlightjs
-								})
-
-							# Done
-							true
-					)
-
-				# Grab all the code blocks
-				balUtil.replaceElementAsync opts.content, '(?:code|pre)', replaceElementCallback, (err,result) ->
+				# Get the window
+				@getWindow (err,window) ->
 					return next(err)  if err
-					opts.content = result
-					cache[cacheKey] = result
-					return next()
+
+					# Turn the code blocks into a JSDOM tree
+					replaceElementCallback = (outerHTML, elementNameMatched, attributes, innerHTML, replaceElementCompleteCallback) ->
+						# Create the element
+						element = window.document.createElement('div')
+						element.innerHTML = outerHTML
+
+						# Highlight the element
+						plugin.highlightElement(
+							window: window
+							element: element
+							config: file.attributes.plugins?.highlightjs
+							next: replaceElementCompleteCallback
+						)
+
+					# Grab all the code blocks
+					balUtil.replaceElementAsync opts.content, '(?:code|pre)', replaceElementCallback, (err,result) ->
+						return next(err)  if err
+						opts.content = result
+						cache[cacheKey] = result
+						return next()
 			else
 				return next()
