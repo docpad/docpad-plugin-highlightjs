@@ -54,6 +54,9 @@ module.exports = (BasePlugin) ->
 			# Remove Indentation
 			source = balUtil.removeIndentation(source)  if removeIndentation isnt false
 
+			# Extrat language
+			language = extractLanguage(language)
+
 			# Highlight
 			result = source
 			if language isnt 'no-highlight'
@@ -75,7 +78,6 @@ module.exports = (BasePlugin) ->
 				hljs.fixMarkup(source, replaceTab)  if replaceTab
 
 				# Highlight
-				language = extractLanguage(language)
 				try
 					# Correct aliases
 					if language and aliases[language]

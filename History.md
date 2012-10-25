@@ -1,6 +1,9 @@
 ## History
 
-- v2.1.0 October, 22, 2012
+- v2.1.1 October 26, 2012
+	- Fixed no highlight detection
+
+- v2.1.0 October 22, 2012
 	- Removed jsdom for simpler and way faster approach
 	- Fixed specifying language in some instances
 	- Changed `sourceFilter` option to the new `transforms` option

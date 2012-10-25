@@ -28,3 +28,13 @@ if true
 		func = ->
 			alert 'hello world'
 		func()
+
+
+### No highlight
+
+``` nohighlight
+if true
+	func = ->
+		alert 'hello world'
+	func()
+```
