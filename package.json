@@ -20,11 +20,11 @@
     "Chase Colman <chase@infinityatlas.com> (http://thedev.infinityatlas.com)"
   ],
   "bugs": {
-    "url": "https://github.com/bevry/docpad-extras/issues"
+    "url": "https://github.com/docpad/docpad-plugin-highlightjs/issues"
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/bevry/docpad-extras.git"
+    "url": "https://github.com/docpad/docpad-plugin-highlightjs.git"
   },
   "engines": {
     "node": ">=0.4.0",
