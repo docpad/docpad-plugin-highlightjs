@@ -62,11 +62,13 @@ if true
 
 #### Output
 
+``` html
 <h3>Coffeescript with fenced code</h3>
 <pre class="highlighted"><code class="coffeescript"><span class="keyword">if</span> <span class="literal">true</span>
     <span class="function"><span class="title">func</span></span> = -&gt;
         alert <span class="string">'hello world'</span>
     func()</code></pre>
+```
 
 
 ## Configure
