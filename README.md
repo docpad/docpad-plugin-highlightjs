@@ -4,7 +4,7 @@ This plugin enables [Highlight.js](https://github.com/isagalaev/highlight.js) sy
 
 ## Install
 
-### Install the Package
+### Install the Plugin
 
 ```
 npm install --save docpad-plugin-highlightjs
