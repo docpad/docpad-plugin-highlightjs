@@ -9,6 +9,36 @@ npm install --save docpad-plugin-highlightjs
 ```
 
 
+## Usage
+
+You can find example inputs [here](https://github.com/docpad/docpad-plugin-highlightjs/tree/master/test/src/documents) and their corresponding example outputs [here](https://github.com/docpad/docpad-plugin-highlightjs/tree/master/test/out-expected) - but for the general gist of things, the following will suffice:
+
+### Via HTML
+
+``` html
+<h3>Coffescript - Lang tag</h3>
+<pre><code class="lang-coffeescript">
+if true
+	func = -&gt;
+		alert "hello world"
+
+	func()
+</code></pre>
+```
+
+### Via Markdown
+
+	### Coffeescript with fenced code
+
+	``` coffeescript
+	if true
+		func = ->
+			alert 'hello world'
+		func()
+	```
+
+
+
 ## Configure
 
 ### Language Aliases
