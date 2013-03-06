@@ -1,5 +1,12 @@
 ## History
 
+- v2.1.2 March 7, 2013
+	- Repackaged
+	- Dependency upgrades
+		-  `bal-util` from ~1.13.13 to ~1.16.8
+		-  `highlight.js` from 7.3.x to ~7.3.0
+		-  `ent` from 0.0.4 to ~0.0.4
+
 - v2.1.1 October 26, 2012
 	- Fixed no highlight detection
 
