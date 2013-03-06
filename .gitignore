@@ -1,7 +1,3 @@
-out
-node_modules
-.DS_Store
-
 lib-cov
 *.seed
 *.log
@@ -15,6 +11,8 @@ pids
 logs
 results
 
+node_modules
 npm-debug.log
 
-.travis*
+test/out/
+out/
