@@ -1,6 +1,7 @@
 module.exports = (BasePlugin) ->
 	# Requires
 	balUtil = require('bal-util')
+	extendr = require('extendr')
 	hljs = require('highlight.js')
 	cache = {}
 
@@ -48,7 +49,7 @@ module.exports = (BasePlugin) ->
 			# Prepare
 			docpad = @docpad
 			{source,language,next} = opts
-			config = balUtil.extend({},@config,opts.config)
+			config = extendr.extend({}, @config, opts.config)
 			{escape,replaceTab,aliases,transforms,removeIndentation} = config
 
 			# Remove Indentation
