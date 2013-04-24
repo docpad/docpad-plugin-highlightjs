@@ -87,16 +87,13 @@ plugins:
 
 
 ### Replacing Tabs
-By default, this plugin does not expand `\t` characters to any number of spaces, etc.
-This can be changed in your [DocPad configuration file](https://github.com/bevry/docpad/wiki/Configuration) by adding something similar to the following:
+By default, we replace tabs with 4 spaces. This can be changed by changing the `replaceTab` configuration option:
 
 ``` coffee
 plugins:
 	highlightjs:
-		replaceTab: '	'
+		replaceTab: null  # keep tabs
 ```
-
-This will replace all `\t` characters to 4 spaces.
 
 
 ### Transforms

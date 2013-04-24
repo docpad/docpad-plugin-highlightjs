@@ -1,5 +1,8 @@
 ## History
 
+- v2.1.6 April 24, 2013
+	- Obey the `replaceTabs` configuration option
+
 - v2.1.5 April 24, 2013
 	- Replace tabs with spaces now that DocPad v6.31 doesn't
 

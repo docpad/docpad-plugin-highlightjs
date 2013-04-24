@@ -12,7 +12,7 @@ module.exports = (BasePlugin) ->
 
 		# Plugin configuration
 		config:
-			replaceTab: null
+			replaceTab: '    '
 			transforms: null
 			escape: false
 			removeIndentation: false
@@ -107,7 +107,7 @@ module.exports = (BasePlugin) ->
 			# Handle
 			result = """
 				<pre class="highlighted"><code class="#{language}">#{result}</code></pre>
-				""".replace(/\t/g,'    ')
+				""".replace(/\t/g, replaceTab)
 			next(null,result)
 
 			# Chain
