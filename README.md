@@ -40,10 +40,10 @@ if true
 <h3>Coffescript - Lang tag</h3>
 <pre class="highlighted"><code class="coffeescript">
 <span class="keyword">if</span> <span class="literal">true</span>
-    <span class="function"><span class="title">func</span></span> = -&gt;
-        alert <span class="string">"hello world"</span>
+	<span class="function"><span class="title">func</span></span> = -&gt;
+		alert <span class="string">"hello world"</span>
 
-    func()
+	func()
 </code></pre>
 ```
 
@@ -65,9 +65,9 @@ if true
 ``` html
 <h3>Coffeescript with fenced code</h3>
 <pre class="highlighted"><code class="coffeescript"><span class="keyword">if</span> <span class="literal">true</span>
-    <span class="function"><span class="title">func</span></span> = -&gt;
-        alert <span class="string">'hello world'</span>
-    func()</code></pre>
+	<span class="function"><span class="title">func</span></span> = -&gt;
+		alert <span class="string">'hello world'</span>
+	func()</code></pre>
 ```
 
 
@@ -92,8 +92,8 @@ This can be changed in your [DocPad configuration file](https://github.com/bevry
 
 ``` coffee
 plugins:
-    highlightjs:
-        replaceTab: '    '
+	highlightjs:
+		replaceTab: '	'
 ```
 
 This will replace all `\t` characters to 4 spaces.
@@ -105,16 +105,16 @@ You can apply transformations to code blocks before they are highlighted by usin
 
 ``` coffee
 plugins:
-    highlightjs:
-    	transforms: [
-    		# Remove extra indentation from the code block
-    		# Requires: http://balupton.com/project/bal-util
-    		(source, language) ->
-        		require('bal-util').removeIndentation(source)  if language in ['bash','coffeescript']
+	highlightjs:
+		transforms: [
+			# Remove extra indentation from the code block
+			# Requires: http://balupton.com/project/bal-util
+			(source, language) ->
+				require('bal-util').removeIndentation(source)  if language in ['bash','coffeescript']
 
-        	# Replace "(C)" with "&copy;"
-        	(source) -> source.replace /\(C\)/gm, '&copy;'
-        ]
+			# Replace "(C)" with "&copy;"
+			(source) -> source.replace /\(C\)/gm, '&copy;'
+		]
 ```
 
 
