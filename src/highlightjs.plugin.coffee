@@ -107,7 +107,7 @@ module.exports = (BasePlugin) ->
 			# Handle
 			result = """
 				<pre class="highlighted"><code class="#{language}">#{result}</code></pre>
-				"""
+				""".replace(/\t/g,'    ')
 			next(null,result)
 
 			# Chain

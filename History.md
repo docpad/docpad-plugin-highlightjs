@@ -1,5 +1,8 @@
 ## History
 
+- v2.1.5 April 24, 2013
+	- Replace tabs with spaces now that DocPad v6.31 doesn't
+
 - v2.1.4 April 5, 2013
 	- Dependency upgrades
 
