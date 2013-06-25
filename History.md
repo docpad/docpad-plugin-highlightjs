@@ -1,5 +1,9 @@
 ## History
 
+- v2.1.7 June 26, 2013
+	- Repackaged
+	- Dependency upgrades
+
 - v2.1.6 April 24, 2013
 	- Obey the `replaceTabs` configuration option
 
