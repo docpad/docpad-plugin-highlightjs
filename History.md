@@ -1,8 +1,11 @@
 ## History
 
+- v2.1.8 October 2, 2013
+	- Updated dependencies
+
 - v2.1.7 June 26, 2013
 	- Repackaged
-	- Dependency upgrades
+	- Updated dependencies
 
 - v2.1.6 April 24, 2013
 	- Obey the `replaceTabs` configuration option
@@ -11,14 +14,14 @@
 	- Replace tabs with spaces now that DocPad v6.31 doesn't
 
 - v2.1.4 April 5, 2013
-	- Dependency upgrades
+	- Updated dependencies
 
 - v2.1.3 April 1, 2013
-	- Dependency upgrades
+	- Updated dependencies
 
 - v2.1.2 March 7, 2013
 	- Repackaged
-	- Dependency upgrades
+	- Updated dependencies
 		-  `bal-util` from ~1.13.13 to ~1.16.8
 		-  `highlight.js` from 7.3.x to ~7.3.0
 		-  `ent` from 0.0.4 to ~0.0.4
