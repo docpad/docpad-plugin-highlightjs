@@ -28,8 +28,7 @@
     "url": "https://github.com/docpad/docpad-plugin-highlightjs.git"
   },
   "engines": {
-    "node": ">=0.4",
-    "docpad": "6.x"
+    "node": ">=0.4"
   },
   "dependencies": {
     "bal-util": "~2.3.0",
