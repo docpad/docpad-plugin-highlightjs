@@ -1,48 +1,50 @@
 {
-	"name": "docpad-plugin-highlightjs",
-	"version": "2.1.8",
-	"description": "Adds support for Highlight.js syntax highlighting to DocPad",
-	"homepage": "http://docpad.org/plugin/highlightjs",
-	"keywords": [
-		"docpad",
-		"docpad-plugin",
-		"highlight",
-		"syntax",
-		"markup",
-		"markdown"
-	],
-	"author": "Chase Colman <chase@infinityatlas.com> (http://thedev.infinityatlas.com)",
-	"maintainers": [
-		"Chase Colman <chase@infinityatlas.com> (https://github.com/chase)",
-		"Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
-	],
-	"contributors": [
-		"Chase Colman <chase@infinityatlas.com> (https://github.com/chase)",
-		"Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
-	],
-	"bugs": {
-		"url": "https://github.com/docpad/docpad-plugin-highlightjs/issues"
-	},
-	"repository": {
-		"type": "git",
-		"url": "https://github.com/docpad/docpad-plugin-highlightjs.git"
-	},
-	"engines": {
-		"node": ">=0.4",
-		"docpad": "6.x"
-	},
-	"dependencies": {
-		"bal-util": "~2.3.0",
-		"extendr": "~2.1.0",
-		"highlight.js": "~7.3.0",
-		"ent": "~0.1.0"
-	},
-	"devDependencies": {
-		"coffee-script": "~1.6.2",
-		"docpad": ">=6.37 <7"
-	},
-	"main": "./out/highlightjs.plugin.js",
-	"scripts": {
-		"test": "node ./out/highlightjs.test.js"
-	}
+  "name": "docpad-plugin-highlightjs",
+  "version": "2.1.8",
+  "description": "Adds support for Highlight.js syntax highlighting to DocPad",
+  "homepage": "http://docpad.org/plugin/highlightjs",
+  "keywords": [
+    "docpad",
+    "docpad-plugin",
+    "highlight",
+    "syntax",
+    "markup",
+    "markdown"
+  ],
+  "author": "Chase Colman <chase@infinityatlas.com> (http://thedev.infinityatlas.com)",
+  "maintainers": [
+    "Chase Colman <chase@infinityatlas.com> (https://github.com/chase)",
+    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+  ],
+  "contributors": [
+    "Chase Colman <chase@infinityatlas.com> (https://github.com/chase)",
+    "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)"
+  ],
+  "bugs": {
+    "url": "https://github.com/docpad/docpad-plugin-highlightjs/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/docpad/docpad-plugin-highlightjs.git"
+  },
+  "engines": {
+    "node": ">=0.4",
+    "docpad": "6.x"
+  },
+  "dependencies": {
+    "bal-util": "~2.3.0",
+    "extendr": "~2.1.0",
+    "highlight.js": "~7.3.0",
+    "ent": "~0.1.0"
+  },
+  "devDependencies": {
+    "coffee-script": "~1.6.2"
+  },
+  "main": "./out/highlightjs.plugin.js",
+  "scripts": {
+    "test": "node ./out/highlightjs.test.js"
+  },
+  "peerDependencies": {
+    "docpad": "6"
+  }
 }
