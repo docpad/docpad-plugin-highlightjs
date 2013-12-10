@@ -16,6 +16,7 @@ module.exports = (BasePlugin) ->
 			transforms: null
 			escape: false
 			removeIndentation: false
+			className: 'hljs'
 			aliases:
 				coffee: 'coffeescript'
 				rb: 'ruby'
@@ -49,8 +50,8 @@ module.exports = (BasePlugin) ->
 			# Prepare
 			docpad = @docpad
 			{source,language,next} = opts
-			config = extendr.extend({}, @config, opts.config)
-			{escape,replaceTab,aliases,transforms,removeIndentation} = config
+			config = extendr.extend({}, @getConfig(), opts.config)
+			{escape,replaceTab,aliases,transforms,removeIndentation,className} = config
 
 			# Remove Indentation
 			source = balUtil.removeIndentation(source)  if removeIndentation isnt false
@@ -106,7 +107,7 @@ module.exports = (BasePlugin) ->
 
 			# Handle
 			result = """
-				<pre class="highlighted"><code class="#{language}">#{result}</code></pre>
+				<pre class="#{className}"><code class="#{language}">#{result}</code></pre>
 				""".replace(/\t/g, replaceTab)
 			next(null,result)
 
@@ -116,6 +117,7 @@ module.exports = (BasePlugin) ->
 		# Render the document
 		renderDocument: (opts, next) ->
 			{extension,file} = opts
+			{className} = @getConfig()
 			plugin = @
 
 			# Handle
@@ -135,7 +137,7 @@ module.exports = (BasePlugin) ->
 					replace: (outerHTML, elementNameMatched, attributes, innerHTML, replaceElementCompleteCallback) ->
 						# Check
 						classes = balUtil.getAttribute(attributes,'class') or ''
-						return replaceElementCompleteCallback(null,outerHTML)  if classes.indexOf('highlighted') isnt -1
+						return replaceElementCompleteCallback(null,outerHTML)  if classes.indexOf(className) isnt -1
 
 						# Replace
 						balUtil.replaceElementAsync(
