@@ -1,11 +1,6 @@
 # [Highlight.js](https://github.com/isagalaev/highlight.js) Plugin for [DocPad](http://docpad.org)
 
-[![Build Status](https://secure.travis-ci.org/docpad/docpad-plugin-highlightjs.png?branch=master)](http://travis-ci.org/docpad/docpad-plugin-highlightjs "Check this project's build status on TravisCI")
-[![NPM version](https://badge.fury.io/js/docpad-plugin-highlightjs.png)](https://npmjs.org/package/docpad-plugin-highlightjs "View this project on NPM")
-[![Gittip donate button](http://badgr.co/gittip/docpad.png)](https://www.gittip.com/docpad/ "Donate weekly to this project using Gittip")
-[![Flattr donate button](https://raw.github.com/balupton/flattr-buttons/master/badge-89x18.gif)](http://flattr.com/thing/344188/balupton-on-Flattr "Donate monthly to this project using Flattr")
-[![PayPayl donate button](https://www.paypalobjects.com/en_AU/i/btn/btn_donate_SM.gif)](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=QB8GQPZAH84N6 "Donate once-off to this project using Paypal")
-
+<!-- BADGES -->
 
 This plugin enables [Highlight.js](https://github.com/isagalaev/highlight.js) syntax highlighting for [DocPad](https://docpad.org)
 
@@ -122,21 +117,10 @@ plugins:
 		]
 ```
 
+<!-- HISTORY -->
 
-## History
-[You can discover the history inside the `History.md` file](https://github.com/bevry/docpad-plugin-highlightjs/blob/master/History.md#files)
+<!-- CONTRIBUTE -->
 
+<!-- BACKERS -->
 
-## Contributing
-[You can discover the contributing instructions inside the `Contributing.md` file](https://github.com/bevry/docpad-plugin-highlightjs/blob/master/Contributing.md#files)
-
-
-## License
-Licensed under the incredibly [permissive](http://en.wikipedia.org/wiki/Permissive_free_software_licence) [MIT License](http://creativecommons.org/licenses/MIT/)
-<br/>Copyright &copy; 2012+ [Chase Colman](http://thedev.infinityatlas.com) <chase@infinityatlas.com>
-
-
-## Special Thanks to
-- Benjamin Lupton for [DocPad](https://docpad.org) and the [Pygments plugin](https://github.com/bevry/docpad-extras/tree/master/plugins/pygments), after which the code for this plugin was modeled
-- Ivan Sagalaev and contributors for [Highlight.js](https://github.com/isagalaev/highlight.js), which this plugin relies on for syntax highlighting
-
+<!-- LICENSE -->

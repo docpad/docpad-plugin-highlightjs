@@ -1,4 +1,4 @@
-# v1.3.1 October 26, 2013
+# v1.3.10 December 10, 2013
 # https://github.com/bevry/base
 
 
@@ -25,6 +25,7 @@ SRC_DIR       = pathUtil.join(APP_DIR, "src")
 OUT_DIR       = pathUtil.join(APP_DIR, "out")
 TEST_DIR      = pathUtil.join(APP_DIR, "test")
 MODULES_DIR   = pathUtil.join(APP_DIR, "node_modules")
+DOCPAD_DIR    = pathUtil.join(MODULES_DIR, "docpad")
 BIN_DIR       = pathUtil.join(MODULES_DIR, ".bin")
 GIT           = "git"
 CAKE          = pathUtil.join(BIN_DIR, "cake#{EXT}")
@@ -87,22 +88,37 @@ actions =
 			fsUtil.exists TEST_DIR, (exists) ->
 				return next()  unless exists
 				# npm install (for test)
-				spawn(NPM, ['install'], {stdio:'inherit', cwd:TEST_DIR}).on('close', safe next)
+				spawn(NPM, ['install'], {stdio:'inherit', cwd:TEST_DIR}).on('close', safe next, step3)
+		step3 = ->
+			fsUtil.exists DOCPAD_DIR, (exists) ->
+				return next()  unless exists
+				# npm install (for test)
+				spawn(NPM, ['install'], {stdio:'inherit', cwd:DOCPAD_DIR}).on('close', safe next)
 		step1()
 
 	compile: (opts,next) ->
 		(next = opts; opts = {})  unless next?
-		# cake install
-		actions.install opts, safe next, ->
+		step1 = ->
+			# cake install
+			actions.install(opts, safe next, step2)
+		step2 = ->
 			# coffee compile
-			spawn(COFFEE, ['-co', OUT_DIR, SRC_DIR], {stdio:'inherit', cwd:APP_DIR}).on('close', safe next)
+			fsUtil.exists COFFEE, (exists) ->
+				return next()  unless exists
+				spawn(COFFEE, ['-co', OUT_DIR, SRC_DIR], {stdio:'inherit', cwd:APP_DIR}).on('close', safe next)
+		step1()
 
 	watch: (opts,next) ->
 		(next = opts; opts = {})  unless next?
-		# cake install
-		actions.install opts, safe next, ->
+		step1 = ->
+			# cake install
+			actions.install(opts, safe next, step2)
+		step2 = ->
 			# coffee watch
-			spawn(COFFEE, ['-wco', OUT_DIR, SRC_DIR], {stdio:'inherit', cwd:APP_DIR}).on('close', safe next)
+			fsUtil.exists COFFEE, (exists) ->
+				return next()  unless exists
+				spawn(COFFEE, ['-wco', OUT_DIR, SRC_DIR], {stdio:'inherit', cwd:APP_DIR}).on('close', safe next)
+		step1()
 
 	test: (opts,next) ->
 		(next = opts; opts = {})  unless next?
@@ -138,7 +154,11 @@ actions =
 			# npm publish
 			spawn(NPM, ['publish'], {stdio:'inherit', cwd:APP_DIR}).on 'close', safe next, ->
 				# git tag
-				spawn(GIT, ['tag', 'v'+PACKAGE_DATA.version, '-a'], {stdio:'inherit', cwd:APP_DIR}).on('close', safe next)
+				spawn(GIT, ['tag', 'v'+PACKAGE_DATA.version, '-a'], {stdio:'inherit', cwd:APP_DIR}).on 'close', safe next, ->
+					# git push origin master
+					spawn(GIT, ['push', 'origin', 'master'], {stdio:'inherit', cwd:APP_DIR}).on 'close', safe next, ->
+						# git push tags
+						spawn(GIT, ['push', 'origin', '--tags'], {stdio:'inherit', cwd:APP_DIR}).on('close', safe next)
 
 
 # =====================================
