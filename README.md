@@ -24,7 +24,7 @@ docpad install highlightjs
 
 ### Download a Stylesheet
 
-[Available stylesheets are here.](https://github.com/isagalaev/highlight.js/tree/7.5/src/styles) [You can preview some of them here.](http://softwaremaniacs.org/media/soft/highlight/test.html)
+[Available stylesheets are here.](https://github.com/isagalaev/highlight.js/tree/7.5/src/styles) [You can preview some of them here.](http://highlightjs.org/static/test.html)
 
 
 ## Usage
