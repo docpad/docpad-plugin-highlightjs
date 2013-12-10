@@ -41,6 +41,9 @@
   "engines": {
     "node": ">=0.4"
   },
+  "peerDependencies": {
+    "docpad": "6"
+  },
   "dependencies": {
     "bal-util": "~2.4.0",
     "extendr": "~2.1.0",
@@ -48,14 +51,12 @@
     "ent": "~0.1.0"
   },
   "devDependencies": {
+    "docpad": "6",
     "coffee-script": "~1.6.2",
     "projectz": "~0.2.7"
   },
   "main": "./out/highlightjs.plugin.js",
   "scripts": {
     "test": "node ./out/highlightjs.test.js"
-  },
-  "peerDependencies": {
-    "docpad": "6"
   }
 }
