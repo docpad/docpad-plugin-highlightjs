@@ -1,8 +1,7 @@
 # History
 
-- v2.2.0 December 10, 2013
-	- Changed `highlight` classname to `hljs` to reflect latest highlight.js stylesheets
-		- Thanks to [Richard Edwards](https://github.com/redwards1966), [Kevin Sookocheff](https://github.com/soofaloofa) for [issue #5](https://github.com/docpad/docpad-plugin-highlightjs/issues/5)
+- v2.1.9 December 10, 2013
+	- You can now customise the css classname that is added via the `className` property, defaults to `highlight`
 	- Updated dependencies
 
 - v2.1.8 October 2, 2013

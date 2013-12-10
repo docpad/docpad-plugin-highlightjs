@@ -16,7 +16,7 @@ module.exports = (BasePlugin) ->
 			transforms: null
 			escape: false
 			removeIndentation: false
-			className: 'hljs'
+			className: 'highlight'
 			aliases:
 				coffee: 'coffeescript'
 				rb: 'ruby'
