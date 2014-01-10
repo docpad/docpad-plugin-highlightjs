@@ -1,5 +1,8 @@
 # History
 
+- v2.2.0 January 10, 2014
+	- Updated dependencies
+
 - v2.1.9 December 10, 2013
 	- You can now customise the css classname that is added via the `className` property, defaults to `highlight`
 	- Updated dependencies

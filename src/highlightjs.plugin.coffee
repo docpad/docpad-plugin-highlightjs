@@ -87,7 +87,7 @@ module.exports = (BasePlugin) ->
 
 					# Perform the render
 					if language
-						if hljs.LANGUAGES[language]?
+						if hljs.getLanguage(language)
 							result = hljs.highlight(language, source)
 						else
 							docpad.warn """
