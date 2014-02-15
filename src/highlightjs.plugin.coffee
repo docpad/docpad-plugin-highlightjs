@@ -107,7 +107,7 @@ module.exports = (BasePlugin) ->
 
 			# Handle
 			result = """
-				<pre class="#{className}"><code class="#{language}">#{result}</code></pre>
+				<pre class="#{className}"><code class="hljs #{language}">#{result}</code></pre>
 				""".replace(/\t/g, replaceTab)
 			next(null,result)
 
