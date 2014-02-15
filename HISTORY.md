@@ -1,8 +1,10 @@
 # History
 
-- v2.2.x
+- v2.2.1 February 15, 2014
 	- Fix to have the `hljs` class in the code element
 		- Thanks to [Troy Kershaw](https://github.com/troykershaw) for [pull request #8](http://github.com/docpad/docpad-plugin-highlightjs/pull/8)
+	- Updated dependencies
+		- coffee-script 1.6.2 to 1.7.1
 
 - v2.2.0 January 10, 2014
 	- Updated dependencies
