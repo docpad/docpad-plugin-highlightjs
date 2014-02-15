@@ -1,5 +1,9 @@
 # History
 
+- v2.2.x
+	- Fix to have the `hljs` class in the code element
+		- Thanks to [Troy Kershaw](https://github.com/troykershaw) for [pull request #8](https://github.com/docpad/docpad-plugin-jade/pull/8)
+
 - v2.2.0 January 10, 2014
 	- Updated dependencies
 
