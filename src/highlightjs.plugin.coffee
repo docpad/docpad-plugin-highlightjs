@@ -65,7 +65,7 @@ module.exports = (BasePlugin) ->
 				# Correctly escape the source
 				if escape isnt true
 					# Unescape the output as highlightjs always escape
-					source = require('ent').decode(source)
+					source = require('he').decode(source)
 
 				# Transforms
 				for transform in transforms or []
