@@ -1,4 +1,4 @@
-# v1.3.14 February 6, 2014
+# v1.3.14 February 6, 2014 - custom mods
 # https://github.com/bevry/base
 language: node_js
 install: "npm install; ./node_modules/.bin/cake install"
