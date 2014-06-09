@@ -1,5 +1,9 @@
 # History
 
+- v2.2.2 June 9, 2014
+	- Switch to [_he_](https://github.com/mathiasbynens/he) for more robust HTML entity decoding
+		- Thanks to [Mathias Bynens](http://mathiasbynens.be/) for [pull request #10](http://github.com/docpad/docpad-plugin-highlightjs/pull/10)
+
 - v2.2.1 February 15, 2014
 	- Fix to have the `hljs` class in the code element
 		- Thanks to [Troy Kershaw](https://github.com/troykershaw) for [pull request #8](http://github.com/docpad/docpad-plugin-highlightjs/pull/8)

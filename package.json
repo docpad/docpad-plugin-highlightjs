@@ -1,6 +1,6 @@
 {
   "name": "docpad-plugin-highlightjs",
-  "version": "2.2.1",
+  "version": "2.2.2",
   "description": "Adds support for Highlight.js syntax highlighting to DocPad",
   "homepage": "http://docpad.org/plugin/highlightjs",
   "license": {
@@ -35,7 +35,8 @@
     "Chase Colman <chase@infinityatlas.com> (https://github.com/chase)",
     "Delapouite (https://github.com/Delapouite)",
     "RobLoach (https://github.com/RobLoach)",
-    "troykershaw (https://github.com/troykershaw)"
+    "troykershaw (https://github.com/troykershaw)",
+    "Mathias Bynens (http://mathiasbynens.be/)"
   ],
   "bugs": {
     "url": "https://github.com/docpad/docpad-plugin-highlightjs/issues"
