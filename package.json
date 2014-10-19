@@ -55,7 +55,7 @@
     "bal-util": "~2.4.1",
     "extendr": "~2.1.0",
     "he": "~0.4.1",
-    "highlight.js": "~8.3.0"
+    "highlight.js": "~8.3"
   },
   "devDependencies": {
     "docpad": "6",
