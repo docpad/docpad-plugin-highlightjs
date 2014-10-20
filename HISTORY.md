@@ -1,5 +1,11 @@
 # History
 
+- v2.3.0 October 19, 2014
+	- Updated dependencies
+		- coffee-script 1.8.0
+		- highlight.js 8.3.0
+		- he 0.5.0
+
 - v2.2.2 June 9, 2014
 	- Switch to [_he_](https://github.com/mathiasbynens/he) for more robust HTML entity decoding
 		- Thanks to [Mathias Bynens](http://mathiasbynens.be/) for [pull request #10](http://github.com/docpad/docpad-plugin-highlightjs/pull/10)
