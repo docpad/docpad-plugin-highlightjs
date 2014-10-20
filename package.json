@@ -34,9 +34,9 @@
     "Benjamin Lupton <b@lupton.cc> (https://github.com/balupton)",
     "Chase Colman <chase@infinityatlas.com> (https://github.com/chase)",
     "Delapouite (https://github.com/Delapouite)",
+    "mathiasbynens (https://github.com/mathiasbynens)",
     "RobLoach (https://github.com/RobLoach)",
-    "troykershaw (https://github.com/troykershaw)",
-    "Mathias Bynens (http://mathiasbynens.be/)"
+    "troykershaw (https://github.com/troykershaw)"
   ],
   "bugs": {
     "url": "https://github.com/docpad/docpad-plugin-highlightjs/issues"
@@ -54,13 +54,13 @@
   "dependencies": {
     "bal-util": "~2.4.1",
     "extendr": "~2.1.0",
-    "he": "~0.4.1",
-    "highlight.js": "~8.0.0"
+    "he": "~0.5.0",
+    "highlight.js": "~8.3.0"
   },
   "devDependencies": {
     "docpad": "6",
-    "coffee-script": "~1.7.1",
-    "projectz": "~0.3.13"
+    "coffee-script": "~1.8.0",
+    "projectz": "~0.3.15"
   },
   "main": "./out/highlightjs.plugin.js",
   "scripts": {
