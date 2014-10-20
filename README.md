@@ -186,6 +186,7 @@ These amazing people have contributed code to this project:
 - [Benjamin Lupton](https://github.com/balupton) <b@lupton.cc> — [view contributions](https://github.com/docpad/docpad-plugin-highlightjs/commits?author=balupton)
 - [Chase Colman](https://github.com/chase) <chase@infinityatlas.com> — [view contributions](https://github.com/docpad/docpad-plugin-highlightjs/commits?author=chase)
 - [Delapouite](https://github.com/Delapouite) — [view contributions](https://github.com/docpad/docpad-plugin-highlightjs/commits?author=Delapouite)
+- [mathiasbynens](https://github.com/mathiasbynens) — [view contributions](https://github.com/docpad/docpad-plugin-highlightjs/commits?author=mathiasbynens)
 - [RobLoach](https://github.com/RobLoach) — [view contributions](https://github.com/docpad/docpad-plugin-highlightjs/commits?author=RobLoach)
 - [troykershaw](https://github.com/troykershaw) — [view contributions](https://github.com/docpad/docpad-plugin-highlightjs/commits?author=troykershaw)
 
