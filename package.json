@@ -61,7 +61,7 @@
   "devDependencies": {
     "docpad": "6",
     "coffee-script": "^1.9.0",
-    "projectz": "^0.4.2"
+    "projectz": "^0.4.3"
   },
   "main": "./out/highlightjs.plugin.js",
   "scripts": {
