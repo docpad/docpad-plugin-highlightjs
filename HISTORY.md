@@ -1,5 +1,9 @@
 # History
 
+- v2.4.0 August 26th, 2016
+	- Updated dependencies
+		- highlight.js ^9.6.0
+
 - v2.3.0 October 19, 2014
 	- Updated dependencies
 		- coffee-script 1.8.0
