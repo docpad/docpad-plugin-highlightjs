@@ -1,6 +1,9 @@
 # History
 
-## v2.4.0 August 26th, 2016
+## v2.5.0 2017 April 20
+- Updated base files
+
+## v2.4.0 2016 August 26
 - Updated dependencies
 	- highlight.js ^9.6.0
 
