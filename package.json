@@ -1,6 +1,6 @@
 {
   "name": "docpad-plugin-highlightjs",
-  "version": "2.5.0",
+  "version": "2.6.0",
   "description": "Adds support for Highlight.js syntax highlighting to DocPad",
   "homepage": "https://github.com/docpad/docpad-plugin-highlightjs",
   "license": "MIT",
@@ -22,7 +22,6 @@
       "---",
       "patreon",
       "opencollective",
-      "gratipay",
       "flattr",
       "paypal",
       "bitcoin",
@@ -33,7 +32,6 @@
     "config": {
       "patreonUsername": "bevry",
       "opencollectiveUsername": "bevry",
-      "gratipayUsername": "bevry",
       "flattrUsername": "balupton",
       "paypalURL": "https://bevry.me/paypal",
       "bitcoinURL": "https://bevry.me/bitcoin",
@@ -49,7 +47,7 @@
   "contributors": [
     "Chase Colman <chase@colman.io> (http://thedev.infinityatlas.com)",
     "Benjamin Lupton <b@lupton.cc> (http://balupton.com)",
-    "Bruno Heridet (http://delapouite.com)",
+    "Bruno Heridet <delapouite@gmail.com> (http://delapouite.com)",
     "Mathias Bynens (http://mathiasbynens.be/)",
     "Rob Loach <robloach@gmail.com> (http://robloach.net)",
     "Troy Kershaw <hello@troykershaw.com> (http://troykershaw.com)",
@@ -77,26 +75,39 @@
       ]
     },
     {
-      "description": "CoffeeScript Compiled + ES5 + Require",
-      "directory": "es5",
+      "description": "CoffeeScript Compiled + ESNext + Require",
+      "directory": "esnext",
       "entry": "highlightjs.plugin.js",
       "syntaxes": [
         "javascript",
-        "es5",
+        "esnext",
+        "require"
+      ]
+    },
+    {
+      "description": "CoffeeScript Compiled + ES2015 + Require",
+      "directory": "es2015",
+      "entry": "highlightjs.plugin.js",
+      "syntaxes": [
+        "javascript",
+        "es2015",
         "require"
       ]
     }
   ],
-  "main": "es5/highlightjs.plugin.js",
+  "main": "index.js",
   "dependencies": {
-    "bal-util": "~2.4.1",
-    "extendr": "~2.1.0",
-    "he": "~0.5.0",
+    "bal-util": "~2.7.0",
+    "editions": "^1.3.4",
+    "extendr": "^3.3.0",
+    "he": "^1.1.1",
     "highlight.js": "^9.6.0"
   },
   "devDependencies": {
-    "coffee-script": "^1.12.5",
-    "coffeelint": "^1.16.0",
+    "babel-core": "^6.26.3",
+    "babel-preset-es2015": "^6.24.1",
+    "coffeelint": "^2.1.0",
+    "coffeescript": "^2.3.1",
     "docpad": "^6.79.4",
     "projectz": "^1.4.0"
   },
@@ -108,20 +119,21 @@
     "our:setup:npm": "npm install",
     "our:setup:docpad": "bash ./docpad-setup.sh",
     "our:clean": "rm -Rf ./docs ./es2015 ./es5 ./out",
-    "our:compile": "npm run our:compile:coffee",
-    "our:compile:coffee": "coffee -bco ./es5 ./source",
+    "our:compile": "npm run our:compile:coffee:esnext && npm run our:compile:coffee:es2015",
+    "our:compile:coffee:esnext": "coffee -bco ./esnext ./source",
+    "our:compile:coffee:es2015": "coffee -bcto ./es2015 ./source",
     "our:meta": "npm run our:meta:projectz",
     "our:meta:projectz": "projectz compile",
     "our:verify": "npm run our:verify:coffeelint",
     "our:verify:coffeelint": "coffeelint ./source",
+    "our:deploy": "echo no need for this project",
     "our:test": "npm run our:verify && npm test",
-    "our:release": "npm run our:release:prepare && npm run our:release:check && npm run our:release:tag && npm run our:release:push",
+    "our:release": "npm run our:release:prepare && npm run our:release:check-changelog && npm run our:release:check-dirty && npm run our:release:tag && npm run our:release:push",
     "our:release:prepare": "npm run our:clean && npm run our:compile && npm run our:test && npm run our:meta",
-    "our:release:check": "npm run our:release:check:changelog && npm run our:release:check:dirty",
-    "our:release:check:changelog": "cat ./HISTORY.md | grep v$npm_package_version || (echo add a changelog entry for v$npm_package_version && exit -1)",
-    "our:release:check:dirty": "git diff --exit-code",
+    "our:release:check-changelog": "cat ./HISTORY.md | grep v$npm_package_version || (echo add a changelog entry for v$npm_package_version && exit -1)",
+    "our:release:check-dirty": "git diff --exit-code",
     "our:release:tag": "export MESSAGE=$(cat ./HISTORY.md | sed -n \"/## v$npm_package_version/,/##/p\" | sed 's/## //' | awk 'NR>1{print buf}{buf = $0}') && test \"$MESSAGE\" || (echo 'proper changelog entry not found' && exit -1) && git tag v$npm_package_version -am \"$MESSAGE\"",
     "our:release:push": "git push origin master && git push origin --tags",
-    "test": "node --harmony es5/highlightjs.test.js --joe-reporter=console"
+    "test": "node --harmony ./test.js --joe-reporter=console"
   }
 }

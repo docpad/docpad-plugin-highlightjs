@@ -50,7 +50,7 @@ module.exports = (BasePlugin) ->
 			# Prepare
 			docpad = @docpad
 			{source,language,next} = opts
-			config = extendr.extend({}, @getConfig(), opts.config)
+			config = extendr.extend({}, @getConfig(), opts.config or {})
 			{escape,replaceTab,aliases,transforms,removeIndentation,className} = config
 
 			# Remove Indentation
