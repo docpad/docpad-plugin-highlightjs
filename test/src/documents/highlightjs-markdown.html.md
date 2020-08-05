@@ -3,36 +3,28 @@ layout: 'layout'
 title: 'Highlight Markdown Test'
 ---
 
-### Coffeescript with fenced code
-
 ```coffeescript
 if true
 	func = ->
-		alert 'hello world'
+		alert 'Coffeescript with fenced code'
 	func()
 ```
-
-### Guessing with fenced code
 
 ```
 if true
 	func = ->
-		alert 'hello world'
+		alert 'Guessing with fenced code'
 	func()
 ```
 
-### Guessing with standard markdown
-
     if true
     	func = ->
-    		alert 'hello world'
+    		alert 'Guessing with standard markdown'
     	func()
-
-### No highlight
 
 ```nohighlight
 if true
 	func = ->
-		alert 'hello world'
+		alert 'No highlight'
 	func()
 ```

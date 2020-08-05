@@ -121,6 +121,7 @@ module.exports = function (BasePlugin) {
 					}
 
 					// Perform the render
+					console.log('one:', { language, source })
 					if (language) {
 						if (hljs.getLanguage(language)) {
 							result = hljs.highlight(language, source)
@@ -147,10 +148,12 @@ module.exports = function (BasePlugin) {
 			}
 
 			// Handle
+			console.log('two:', { className, language, result })
 			result = `<pre class="${className}"><code class="hljs ${language}">${result}</code></pre>`.replace(
 				/\t/g,
 				replaceTab
 			)
+			console.log('three:', { className, language, result })
 			return Promise.resolve(result)
 		}
 
@@ -187,14 +190,14 @@ module.exports = function (BasePlugin) {
 						}
 
 						// Replace
-						return ropo.replaceElementAsync(sections.inner, /code/, function (
+						return ropo.replaceElementAsync(sections.content, /code/, function (
 							sections,
 							captures
 						) {
 							const classes =
 								ropo.extractAttribute(captures.attributes, 'class') || ''
 							return plugin.highlightSource({
-								source: sections.inner,
+								source: sections.content,
 								language: classes,
 								config:
 									file.attributes.plugins &&
