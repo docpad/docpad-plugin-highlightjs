@@ -19,9 +19,7 @@
 
 <!-- /BADGES -->
 
-
 This plugin enables [Highlight.js](https://github.com/isagalaev/highlight.js) syntax highlighting for [DocPad](https://docpad.org)
-
 
 ## Install
 
@@ -35,7 +33,6 @@ docpad install highlightjs
 
 [Available stylesheets are here.](https://github.com/isagalaev/highlight.js/tree/8.0/src/styles) [You can preview some of them here.](http://highlightjs.org/static/test.html)
 
-
 ## Usage
 
 Example inputs are [here](https://github.com/docpad/docpad-plugin-highlightjs/tree/master/test/src/documents) and their corresponding outputs are [here](https://github.com/docpad/docpad-plugin-highlightjs/tree/master/test/out-expected). For the general gist of things, the following will suffice:
@@ -44,7 +41,7 @@ Example inputs are [here](https://github.com/docpad/docpad-plugin-highlightjs/tr
 
 #### Input
 
-``` html
+```html
 <h3>Coffescript - Lang tag</h3>
 <pre><code class="lang-coffeescript">
 if true
@@ -57,7 +54,7 @@ if true
 
 #### Output
 
-``` html
+```html
 <h3>Coffescript - Lang tag</h3>
 <pre class="highlighted"><code class="coffeescript">
 <span class="keyword">if</span> <span class="literal">true</span>
@@ -72,32 +69,34 @@ if true
 
 #### Input
 
-	### Coffeescript with fenced code
+    ### Coffeescript with fenced code
 
-	``` coffeescript
-	if true
-		func = ->
-			alert 'hello world'
-		func()
-	```
+    ``` coffeescript
+    if true
+    	func = ->
+    		alert 'hello world'
+    	func()
+    ```
 
 #### Output
 
-``` html
+```html
 <h3>Coffeescript with fenced code</h3>
-<pre class="highlighted"><code class="coffeescript"><span class="keyword">if</span> <span class="literal">true</span>
+<pre
+    class="highlighted"
+><code class="coffeescript"><span class="keyword">if</span> <span class="literal">true</span>
 	<span class="function"><span class="title">func</span></span> = -&gt;
 		alert <span class="string">'hello world'</span>
 	func()</code></pre>
 ```
 
-
 ## Configure
 
 ### Language Aliases
+
 Sometimes one of the languages you want to highlight isn't available. In which case, you'd probably want to add an alias for it to a language that is similar. To do this, you'll want to add something like the following to your docpad configuration file.
 
-``` coffee
+```coffee
 plugins:
 	highlightjs:
 		aliases:
@@ -106,22 +105,21 @@ plugins:
 
 [You can find a list of languages that are supported via the Highlight.js source tree.](https://github.com/isagalaev/highlight.js/tree/master/src/languages)
 
-
 ### Replacing Tabs
+
 By default, we replace tabs with 4 spaces. This can be changed by changing the `replaceTab` configuration option:
 
-``` coffee
+```coffee
 plugins:
 	highlightjs:
 		replaceTab: null  # keep tabs
 ```
 
-
 ### Transforms
 
 You can apply transformations to code blocks before they are highlighted by using the `transforms` configuration option. It accepts an array of functions or arrays.
 
-``` coffee
+```coffee
 plugins:
 	highlightjs:
 		transforms: [
@@ -139,14 +137,11 @@ plugins:
 
 You can customise the css classname that is added by adjusting the `className` configuration option, defaults to `highlight`
 
-``` coffee
+```coffee
 plugins:
 	highlightjs:
 		className: 'blah'
 ```
-
-
-
 
 <!-- HISTORY/ -->
 
@@ -156,7 +151,6 @@ plugins:
 
 <!-- /HISTORY -->
 
-
 <!-- CONTRIBUTE/ -->
 
 <h2>Contribute</h2>
@@ -164,7 +158,6 @@ plugins:
 <a href="https://github.com/docpad/docpad-plugin-highlightjs/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
 
 <!-- /CONTRIBUTE -->
-
 
 <!-- BACKERS/ -->
 
@@ -204,7 +197,6 @@ These amazing people have contributed code to this project:
 <a href="https://github.com/docpad/docpad-plugin-highlightjs/blob/master/CONTRIBUTING.md#files">Discover how you can contribute by heading on over to the <code>CONTRIBUTING.md</code> file.</a>
 
 <!-- /BACKERS -->
-
 
 <!-- LICENSE/ -->
 

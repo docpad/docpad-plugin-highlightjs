@@ -5,13 +5,12 @@ title: 'Highlight Markdown Test'
 
 ### Coffeescript with fenced code
 
-``` coffeescript
+```coffeescript
 if true
 	func = ->
 		alert 'hello world'
 	func()
 ```
-
 
 ### Guessing with fenced code
 
@@ -24,15 +23,14 @@ if true
 
 ### Guessing with standard markdown
 
-	if true
-		func = ->
-			alert 'hello world'
-		func()
-
+    if true
+    	func = ->
+    		alert 'hello world'
+    	func()
 
 ### No highlight
 
-``` nohighlight
+```nohighlight
 if true
 	func = ->
 		alert 'hello world'
