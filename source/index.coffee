@@ -1,6 +1,7 @@
 module.exports = (BasePlugin) ->
 	# Requires
-	balUtil = require('bal-util')
+	ropo = require('ropo')
+	trimIndentation = require('trim-indentation').default
 	extendr = require('extendr')
 	hljs = require('highlight.js')
 	cache = {}
@@ -48,13 +49,14 @@ module.exports = (BasePlugin) ->
 		# Highlight an element
 		highlightSource: (opts) ->
 			# Prepare
+			console.log('highlightSource')
 			docpad = @docpad
-			{source,language,next} = opts
+			{source,language} = opts
 			config = extendr.extend({}, @getConfig(), opts.config or {})
 			{escape,replaceTab,aliases,transforms,removeIndentation,className} = config
 
 			# Remove Indentation
-			source = balUtil.removeIndentation(source)  if removeIndentation isnt false
+			source = trimIndentation(source)  if removeIndentation isnt false
 
 			# Extrat language
 			language = extractLanguage(language)
@@ -72,7 +74,7 @@ module.exports = (BasePlugin) ->
 					if transform instanceof Function
 						# transforms = (source) ->
 						source = transform(source, language)
-					else if transform instanceof Array and transform.length is 2
+					else if Array.isArray(transform) and transform.length is 2
 						# transforms = ['find' or RegExp, 'replace']
 						source = source.replace(transform[0], transform[1])
 
@@ -103,16 +105,13 @@ module.exports = (BasePlugin) ->
 					language = result.language
 					result = result.value
 				catch err
-					return next(err)  if err
+					return Promise.reject(err)  if err
 
 			# Handle
 			result = """
 				<pre class="#{className}"><code class="hljs #{language}">#{result}</code></pre>
 				""".replace(/\t/g, replaceTab)
-			next(null,result)
-
-			# Chain
-			@
+			return Promise.resolve(result)
 
 		# Render the document
 		renderDocument: (opts, next) ->
@@ -130,37 +129,33 @@ module.exports = (BasePlugin) ->
 					return next()
 
 				# Grab all the code blocks
-				balUtil.replaceElementAsync(
-					html: opts.content
-					element: 'pre'
-					removeIndentation: false
-					replace: (outerHTML, elementNameMatched, attributes, innerHTML, replaceElementCompleteCallback) ->
+				ropo.replaceElementAsync(
+					opts.content,
+					/pre/,
+					(sections, captures) ->
 						# Check
-						classes = balUtil.getAttribute(attributes,'class') or ''
-						return replaceElementCompleteCallback(null,outerHTML)  if classes.indexOf(className) isnt -1
+						console.log('pre replaceElementAsync')
+						classes = ropo.extractAttribute(captures.attributes, 'class') or ''
+						return sections.outer  if classes.includes(className)
 
 						# Replace
-						balUtil.replaceElementAsync(
-							html: innerHTML
-							element: 'code'
-							removeIndentation: false
-							replace: (outerHTML, elementNameMatched, attributes, innerHTML, replaceElementCompleteCallback) ->
-								classes = balUtil.getAttribute(attributes,'class') or ''
-								plugin.highlightSource(
-									source: innerHTML
+						return ropo.replaceElementAsync(
+							sections.inner,
+							/code/,
+							(sections, captures) ->
+								console.log('code replaceElementAsync')
+								classes = ropo.extractAttribute(captures.attributes, 'class') or ''
+								return plugin.highlightSource(
+									source: sections.inner
 									language: classes
 									config: file.attributes.plugins?.highlightjs
-									next: replaceElementCompleteCallback
 								)
-							next: replaceElementCompleteCallback
 						)
-
-					next: (err,result) ->
-						return next(err)  if err
-						opts.content = result
-						cache[cacheKey] = result
-						return next()
-				)
+				).then(->
+					opts.content = result
+					cache[cacheKey] = result
+					return next()
+				).catch(next)
 
 			else
 				return next()
