@@ -119,7 +119,7 @@
     "editions": "^3.16.0",
     "extendr": "^5.13.0",
     "he": "^1.2.0",
-    "highlight.js": "^10.1.2",
+    "highlight.js": "^11.5.1",
     "ropo": "^2.20.0",
     "trim-indentation": "^4.9.0"
   },
