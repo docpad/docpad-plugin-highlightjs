@@ -116,7 +116,7 @@
   "main": "index.cjs",
   "dependencies": {
     "docpad-baseplugin": "^1.4.0",
-    "editions": "^3.16.0",
+    "editions": "^6.13.0",
     "extendr": "^5.13.0",
     "he": "^1.2.0",
     "highlight.js": "^10.1.2",
